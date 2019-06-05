@@ -1,0 +1,21 @@
+{{# if products}}
+<div class="row">
+<div class="col-md-4 offset-md-4">
+<div class="list-group">
+  {{# each products}}
+    <a href="#" class="list-group-item list-group-item-action">
+      <span class="badge">{{this.qty}}</span>
+      <strong>{{this.item.name}}</strong>
+
+      <span class="label label-success">${{this.price}}</span>
+    </a>
+  {{/each}}
+
+   <strong>Total: ${{totalPrice}}</strong>
+   <a href="/checkout" type="button" class="btn btn-success">Checkout</a>
+</div>
+</div>
+</div>
+{{else}}
+  <h2>no items in the cart</h2>
+{{/if}}
