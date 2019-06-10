@@ -18,7 +18,7 @@ passport.use('local.signup', new LocalStrategy({
   passReqToCallback: true
   }, function(req, email, password, done) {
     req.checkBody('email', 'Invalid email').notEmpty().isEmail();
-    req.checkBody('password', 'Invalid password').notEmpty().isLength({min: 4});
+    req.checkBody('password', 'Invalid password').notEmpty().isLength({min: 4 });
     var errors = req.validationErrors();
     if (errors) {
       var messages = [];
@@ -26,6 +26,9 @@ passport.use('local.signup', new LocalStrategy({
         messages.push(error.msg);
       });
       return done(null, false, req.flash('error', messages));
+    }
+    if (password != req.body.rePassword) {
+      return done(null, false, req.flash('error', 'Passwords do not match!'));
     }
     User.findOne({'email': email}, function(err, user) {
       if (err) {
@@ -35,8 +38,11 @@ passport.use('local.signup', new LocalStrategy({
         return done(null, false, {message: 'Email is already in use.'});
       }
       var newUser = new User();
+      newUser.firstName = req.body.firstName;
+      newUser.lastName = req.body.lastName;
       newUser.email = email;
       newUser.password = newUser.encryptPassword(password);
+      newUser.isAdmin = false;
       newUser.save(function(err, result) {
         if (err) {
           return done(err);

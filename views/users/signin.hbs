@@ -1,6 +1,7 @@
-<div class="row">
+<link rel='stylesheet' href="/stylesheets/login-style.css" />
+
+<div class="row" style="margin-top: 100px">
   <div class="col-md-4 offset-md-4">
-    <h1>Sign In</h1>
     {{#if hasErrors}}
       <div class="alert alert-danger">
         {{# each messages}}
@@ -8,17 +9,31 @@
         {{/each}}
       </div>
     {{/if}}
-    <form action='/users/signin' method="POST">
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input type="text" id="email" name="email" class="form-control">
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles -->
+        <div class="fadeIn first">
+          <h3 class="stext-my" style="padding-bottom: 20px; padding-top: 20px">Sign In</h3>
+        </div>
+        <!-- Login Form -->
+        <form action='/users/signin' method="POST">
+          <input type="text" id="email" class="fadeIn second input-my" name="email" placeholder="E-mail">
+          <input type="password" id="password" class="fadeIn third input-my" name="password" placeholder="Password">
+
+          <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+          <input type="submit" class="fadeIn fourth" value="Sign in">
+        </form>
+
+        <a class="underlineHover" href="#">Forgot Password?</a>
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+          <a class="underlineHover" href="/users/signup">Don't have an account? Sign up!</a>
+
+        </div>
+
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" class="form-control">
-      </div>
-      <input type="hidden" name="_csrf" value="{{ csrfToken }}">
-      <button type="submit" class="btn btn-primary">Sign In</button>
-    </form>
+    </div>
   </div>
 </div>

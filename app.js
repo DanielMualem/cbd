@@ -22,12 +22,14 @@ mongoose.connect("mongodb://localhost:27017/shop", { useNewUrlParser: true });
 require('./config/passport');
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
-app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs'}));
+app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs', helpers: require("./public/javascripts/helpers.js").helpers}));
 app.set('view engine', '.hbs');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(express.json());
+//app.use(express.urlencoded());
 app.use(validator());
 app.use(cookieParser());
 app.use(session({
