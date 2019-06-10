@@ -14,13 +14,19 @@ router.get('/', function(req, res, next) {
 
 
 /* GET home page. */
-router.get('/test', function(req, res, next) {
-  res.render('users/test');
+router.get('/products/product-details/:sku', function(req, res, next) {
+  Product.findOne({'sku': req.params.sku}, function(err, product) {
+    if (err) {
+      return res.redirect('/');
+    }
+    res.render('product-details', { product: product});
+  });
 });
+
 
 /* GET products page. */
 router.get('/products', function(req, res, next) {
-  Product.find(function(err, docs) {
+  Product.find(null, null, {sort: { 'category': 'asc' }},function(err, docs) {
     var productChunks = [];
     var chunkSize = 4;
     for (var i = 0; i < docs.length; i += chunkSize) {
@@ -32,7 +38,7 @@ router.get('/products', function(req, res, next) {
 
 /* GET products page by category. */
 router.get('/products/:category', function(req, res, next) {
-  Product.find({"category": req.params.category}, function(err, docs) {
+  Product.find({"category": req.params.category}, null, {sort: { 'name': 'asc' }}, function(err, docs) {
     var productChunks = [];
     var chunkSize = 4;
     for (var i = 0; i < docs.length; i += chunkSize) {
@@ -44,7 +50,7 @@ router.get('/products/:category', function(req, res, next) {
 
 /* GET products page by category. */
 router.post('/product/search', function(req, res, next) {
-  Product.find({"name": {'$regex' : req.body.searchTxt, '$options' : 'i'}}, function(err, docs) {
+  Product.find({"name": {'$regex' : req.body.searchTxt, '$options' : 'i'}}, null, {sort: { 'category': 'asc' }}, function(err, docs) {
 
     var productChunks = [];
     var chunkSize = 4;
