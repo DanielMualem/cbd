@@ -19,7 +19,7 @@ router.get('/products/product-details/:sku', function(req, res, next) {
     if (err) {
       return res.redirect('/');
     }
-    res.render('product-details', { product: product});
+    res.render('product-details', { title: 'Product Details', product: product});
   });
 });
 
@@ -100,7 +100,7 @@ router.get('/shopping-cart', function(req, res, next) {
     return res.render('shopping-cart', { products: null});
   }
   var cart = new Cart(req.session.cart);
-  return res.render('shopping-cart', { products: cart.generateArray(), totalPrice: cart.totalPrice, coupon: req.session.cart.availableCoupon});
+  return res.render('shopping-cart', { title: 'Shopping Cart', products: cart.generateArray(), totalPrice: cart.totalPrice, coupon: req.session.cart.availableCoupon});
 });
 
 
@@ -111,7 +111,7 @@ router.get('/checkout', isLoggedIn, function(req, res, next) {
   }
   var cart = new Cart(req.session.cart);
   var errMsg = req.flash('error')[0];
-  res.render('checkout', { total: cart.totalPrice, errMsg: errMsg, noError: !errMsg});
+  res.render('checkout', { title: 'Shopping Cart', total: cart.totalPrice, errMsg: errMsg, noError: !errMsg});
 });
 
 router.post('/checkout', isLoggedIn, function(req, res, next) {
@@ -166,7 +166,7 @@ router.post('/cart/applycoupon', function(req, res, next) {
   req.session.cart.totalPrice = totalPrice;
   var cart = new Cart(req.session.cart);
   req.session.cart = cart;
-  return res.render('shopping-cart', { products: cart.generateArray(), totalPrice: totalPrice, coupon: req.session.cart.availableCoupon});
+  return res.render('shopping-cart', { title: 'Shopping Cart', products: cart.generateArray(), totalPrice: totalPrice, coupon: req.session.cart.availableCoupon});
 });
 
 
