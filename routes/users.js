@@ -22,8 +22,10 @@ router.get('/profile', isLoggedIn, function(req, res, next) {
       cart = new Cart(order.cart);
       order.items = cart.generateArray();
     });
+    //console.log(orders);
+    res.render('users/profile', {orders: orders});
   });
-  res.render('users/profile');
+
 });
 
 // Logout

@@ -8,6 +8,9 @@ var register = function(Handlebars) {
     },
     len: function(products) {
       return products.length;
+    },
+    addNum: function(a, b) {
+      return (a+b).toFixed(2);
     }
 };
 

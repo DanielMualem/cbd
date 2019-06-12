@@ -1,17 +1,45 @@
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
 <head>
-	<title>Shoping Cart</title>
+	<title>User Profile</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 =============================-->
 </head>
+<p class="stext-my2 cl13 m-t-100" >My Orders</p>
+{{# each orders}}
+<div class="wrap-table-shopping-cart m-t-75">
+
+	<table class="table-shopping-cart ">
+		<tr class="table_head">
+			<th class="column-1">Product</th>
+			<th class="column-2"></th>
+			<th class="column-3">Price</th>
+			<th class="column-4">Quantity</th>
+			<th class="column-5">Total</th>
+		</tr>
+		{{# each this.items}}
+		<tr class="">
+			<td class="column-1">
+					<img src="{{this.item.imgPath}}"  height="50"  alt="IMG">
+			</td>
+			<td class="column-2">{{this.item.name}}</td>
+			<td class="column-3">$ {{this.item.price}}</td>
+			<td class="column-4">{{this.qty}}</td>
+			<td class="column-5">$ {{this.price}}</td>
+		</tr>
+		{{/each}}
+		<tr class="table_head">
+			<th class="column-1"><strong class="stext-104 ">{{this.date}}</strong></th>
+			<th class="column-2"></th>
+			<th class="column-3"></th>
+			<th class="column-4"></th>
+			<th class="column-5"><strong class="stext-104 ">Total Price: $ {{fixed this.cart.totalPrice}}<h1 class="stext-102" {{#if (ifEqual this.cart.availableCoupon 2)}} hidden {{/if}}>(with coupon)</h1></strong></th>
+		</tr>
 
 
-<!-- Shoping Cart -->
+	</table>
 
-  <div class="container m-t-75">
-    <h1> Soon...</h1>
-  </div>
+</div>
+{{/each}}
