@@ -8,6 +8,8 @@ var userSchema = new Schema({
   firstName: {type: String, required: true},
   lastName: {type: String, required: true},
   isAdmin: {type: Boolean, required: true},
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 });
 
 userSchema.methods.encryptPassword = function(password) {
