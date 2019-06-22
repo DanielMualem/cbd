@@ -21,7 +21,7 @@ var register = function(Handlebars) {
     },
     oldPrice: function(price, coupon) {
       if (coupon == 2) {
-        return price;
+        return price.toFixed(2);
       }
       return ((10*price)/7).toFixed(2);
     },

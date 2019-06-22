@@ -8,7 +8,14 @@ var Order = require('../models/order');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var succMsg = req.flash('success')[0];
-  res.render('index', { title: 'Index', succMsg: succMsg, noMessages: !succMsg});
+
+  Product.find({}).sort({'sold': -1}).limit(3).exec(function(err, items) {
+    console.log(items);
+
+    res.render('index', { title: 'Index', succMsg: succMsg, noMessages: !succMsg, best: items});
+  });
+
+
 });
 
 

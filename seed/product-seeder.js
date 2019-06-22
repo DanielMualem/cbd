@@ -16,7 +16,9 @@ var products = [
     description: 'ORGANIC GUMMY BEARS (VEGAN) 750MG',
     imgPath: 'https://www.sunstatehemp.com/templates/themes/frontend/standard/images/product/sunstate_750mg-bears-no-lid-(2).jpg',
     price: 41.99,
-    quantity: 50
+    quantity: 50,
+    sold: 4,
+    rating: 0
   }),
   new Product({
     category: 'Vegan',
@@ -25,7 +27,9 @@ var products = [
     description: 'ORGANIC GUMMY WORMS (VEGAN) 750MG',
     imgPath: 'https://www.sunstatehemp.com/templates/themes/frontend/standard/images/product/sunstate_750mg-worms-no-lid-(2).jpg',
     price: 41.99,
-    quantity: 50
+    quantity: 50,
+    sold: 0,
+    rating: 0
   }),
   new Product({
     category: 'Vegan',
@@ -34,7 +38,9 @@ var products = [
     description: 'ORGANIC GUMMY FRUIT SLICES (VEGAN) 750MG',
     imgPath: 'https://www.sunstatehemp.com/templates/themes/frontend/standard/images/product/vegan-web_1500mg-fruit-slices-no-lid-zoom.png',
     price: 71.99,
-    quantity: 50
+    quantity: 50,
+    sold: 0,
+    rating: 0
   }),
   new Product({
     category: 'Edibles',
@@ -43,7 +49,9 @@ var products = [
     description: 'FULL SPECTRUM GUMMY WORMS 750MG',
     imgPath: 'https://www.sunstatehemp.com/templates/themes/frontend/standard/images/product/full-spectrum-worms-zoom.jpg',
     price: 32.99,
-    quantity: 50
+    quantity: 50,
+    sold: 0,
+    rating: 0
   }),
   new Product({
     category: 'Edibles',
@@ -52,7 +60,9 @@ var products = [
     description: 'FULL SPECTRUM GUMMY PEACH RINGS 750MG',
     imgPath: 'https://www.sunstatehemp.com/templates/themes/frontend/standard/images/product/full-spectrum-peach-rings-zoom.jpg',
     price: 32.99,
-    quantity: 50
+    quantity: 50,
+    sold: 0,
+    rating: 0
   }),
   new Product({
     category: 'Edibles',
@@ -61,7 +71,9 @@ var products = [
     description: 'GUMMY BEARS 180MG - 12 COUNT BAG',
     imgPath: 'https://www.sunstatehemp.com/templates/themes/frontend/standard/images/product/bag-(1).jpg',
     price: 12.99,
-    quantity: 50
+    quantity: 50,
+    sold: 5,
+    rating: 0
   }),
   new Product({
     category: 'Tincture',
@@ -70,7 +82,9 @@ var products = [
     description: 'TINCTURE HEMP SEED OIL 150MG',
     imgPath: 'https://www.sunstatehemp.com/templates/themes/frontend/standard/images/product/hemp-oils-150-zoom.png',
     price: 17.99,
-    quantity: 50
+    quantity: 50,
+    sold: 0,
+    rating: 0
   }),
   new Product({
     category: 'Tincture',
@@ -79,7 +93,9 @@ var products = [
     description: 'TINCTURE HEMP SEED OIL 1000MG',
     imgPath: 'https://www.sunstatehemp.com/templates/themes/frontend/standard/images/product/hempseed-oil-1000-zoom.jpeg',
     price: 99.99,
-    quantity: 50
+    quantity: 50,
+    sold: 12,
+    rating: 0
   }),
   new Product({
     category: 'Pet-care',
@@ -88,7 +104,9 @@ var products = [
     description: 'PET CAT TREATS SEAFOOD MIX 100MG',
     imgPath: 'https://www.sunstatehemp.com/templates/themes/frontend/standard/images/product/pet-treats-05.jpg',
     price: 29.99,
-    quantity: 50
+    quantity: 50,
+    sold: 0,
+    rating: 0
   }),
   new Product({
     category: 'Pet-care',
@@ -97,7 +115,9 @@ var products = [
     description: 'PET TREATS STEAK 100MG',
     imgPath: 'https://www.sunstatehemp.com/templates/themes/frontend/standard/images/product/retry-02.jpg',
     price: 71.99,
-    quantity: 50
+    quantity: 50,
+    sold: 0,
+    rating: 0
   })
 ];
 

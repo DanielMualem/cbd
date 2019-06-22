@@ -8,7 +8,9 @@ var schema = new Schema({
   description: {type: String, required: true},
   imgPath: {type: String, required: true},
   price: {type: Number, required: true},
-  quantity: {type: Number, required: true}
+  quantity: {type: Number, required: true},
+  sold: {type: Number, required: false},
+  rating: {type: Number, required: false}
 });
 
 module.exports = mongoose.model('Product', schema);
