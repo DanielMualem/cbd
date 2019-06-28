@@ -48,6 +48,36 @@ var register = function(Handlebars) {
       }
       console.log(items);
       return items;
+    },
+    isMobile: function(agent) {
+      console.log(agent);
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(agent) ) {
+        console.log('trueeeeee');
+        return true;
+        
+      }
+      console.log('falseeeee');
+      return false;
+    },
+    revToProd: function(reviews, sku) {
+      for (var i = 0; i < reviews.length; i++) {
+        //console.log(reviews[i]._id + sku);
+        if (reviews[i]._id == sku) {
+          return reviews[i].avgRating;
+        }
+
+      }
+      return 0;
+    },
+    numOfReviews: function(reviews, sku) {
+      for (var i = 0; i < reviews.length; i++) {
+        //console.log(reviews[i]._id + sku);
+        if (reviews[i]._id == sku) {
+          return reviews[i].count;
+        }
+
+      }
+      return 0;
     }
 };
 

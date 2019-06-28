@@ -5,10 +5,9 @@
 	<title>User Profile</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-=============================-->
 </head>
 <div class="container">
-<p class="stext-my2 cl13 m-t-100" >My Orders</p>
+<p class="stext-my2 cl13 m-t-100" >{{user.firstName}}'s Orders</p>
 {{# each orders}}
 <div class="wrap-table-shopping-cart m-t-75">
 
@@ -25,7 +24,7 @@
 			<td class="column-1">
 					<img src="{{this.item.imgPath}}"  height="50"  alt="IMG">
 			</td>
-			<td class="column-2">{{this.item.name}}</td>
+			<td class="column-2"><a class="hov3" style="color: black" href="/products/product-details/{{this.item.sku}}">{{this.item.name}}</a> &nbsp;<a href="/users/review-item?sku={{this.item.sku}}&orderId={{../this._id}}" {{# if (ifEqual this.gotReview true)}} hidden {{/if}}>review item</a></td>
 			<td class="column-3">$ {{this.item.price}}</td>
 			<td class="column-4">{{this.qty}}</td>
 			<td class="column-5">$ {{this.price}}</td>

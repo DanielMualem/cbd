@@ -2,13 +2,13 @@
 	<title>Shop</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-=============================-->
 </head>
-<div class="bg-products m-t-100"></div>
+<img src="https://hempbombs.com/wp-content/uploads/2018/11/cbd-oil-effects_00000.jpg" alt="banner" class="m-t-100" style="width: 100%; height: auto;">
+<div class="bg-products m-t-100" hidden></div>
 <div class="bg0 p-b-140">
   <div class="container">
     <div class="flex-w flex-sb-m p-b-52">
-      <div class="flex-w flex-l-m filter-tope-group ">
+      <div class="flex-w flex-l-m filter-tope-group " hidden>
         <button onclick="location.href='/products';" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 {{#if (ifEqual this.type 'all-products')}} how-active1 {{/if}}">
           All Products
         </button>
@@ -54,6 +54,9 @@
 
         <span class="stext-104 cl3 offset-5 " style="text-align: center;">
           ${{this.price}}
+        </span>
+        <span class="stext-102 cl3 offset-3 " style="text-align: center;">
+          <i class="zmdi zmdi-star"></i>&nbsp; {{revToProd ../../this.avgReviews this.sku}}/5 ({{numOfReviews ../../this.avgReviews this.sku}} Reviews)
         </span>
       </div>
 

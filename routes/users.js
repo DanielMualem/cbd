@@ -10,6 +10,8 @@ var bcrypt = require('bcrypt-nodejs');
 var Cart = require('../models/cart');
 var Order = require('../models/order');
 var User = require('../models/user');
+var Product = require('../models/product');
+var Review = require('../models/review');
 
 
 var csrfProtection = csrf();
@@ -18,19 +20,66 @@ router.use(csrfProtection);
 
 // Profile
 router.get('/profile', isLoggedIn, function(req, res, next) {
-  Order.find({user: req.user}, function(err, orders) {
+  Order.find({user: req.user},  function(err, orders) {
     if (err) {
-      return res.write('Error');
+      return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
     }
+    //console.log(orders);
+    orders = orders.reverse();
     var cart;
     orders.forEach(function(order) {
       cart = new Cart(order.cart);
+      console.log(cart);
       order.items = cart.generateArray();
     });
-    //console.log(orders);
-    res.render('users/profile', {orders: orders});
+    console.log(orders);
+    res.render('users/profile', {orders: orders, user: req.user});
   });
+});
 
+router.get('/review-item', isLoggedIn, function(req, res, next) {
+  Product.findOne({'sku': req.query.sku}, function(err, product) {
+    if (err) {
+      return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+    }
+    console.log(product);
+    res.render('product-review', {product: product, orderId: req.query.orderId, user: req.user, csrfToken: req.csrfToken()});
+  });
+});
+
+router.post('/review-item', isLoggedIn, function(req, res, next) {
+  Product.findOne({'sku': req.body.sku}, function(err, product) {
+    if (err) {
+      return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+    }
+    var review = new Review({
+      user: req.user,
+      sku: product.sku,
+      category: product.category,
+      rating: req.body.rating,
+      details: req.body.details
+    });
+
+    review.save(function(err, result) {
+      if (err) {
+        return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+      }
+      Order.findOne({'_id': req.body.orderId}, function(err, order) {
+        var carty = new Cart(order.cart);
+        carty.items[req.body.sku].gotReview = true;
+        order.cart = carty;
+    
+        order.save(function(err, result) {
+          if (err) {
+            return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+          }
+          return res.render('success', {errMsg: 'Thank you for your review!'});
+        });
+      });
+    });
+    
+    //console.log(product);
+  });
 });
 
 // Logout

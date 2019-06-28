@@ -10,16 +10,16 @@ a {
   position: relative;
   /* The image used */
   background-image: url(https://hempbombs.com/wp-content/uploads/2018/11/cbd-oil-effects_00000.jpg);
-
-  /* Full height */
-  height: 100%;
-  width: 100%
-
   /* Center and scale the image nicely */
-  background-position: center;
+  background-position: left;
   background-repeat: no-repeat;
 
+  /* Full height */
+  height: auto;
+  width: 100%;
 }
+
+
 
 
 
@@ -54,3 +54,5 @@ a {
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
+
+

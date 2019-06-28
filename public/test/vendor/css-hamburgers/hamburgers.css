@@ -13,7 +13,7 @@
   transition-duration: 0.15s;
   transition-timing-function: linear;
   font: inherit;
-  color: inherit;
+  color: white;
   text-transform: none;
   background-color: transparent;
   border: 0;
@@ -35,7 +35,7 @@
   .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
     width: 40px;
     height: 4px;
-    background-color: #000;
+    background-color: #fff;
     border-radius: 4px;
     position: absolute;
     transition-property: transform;

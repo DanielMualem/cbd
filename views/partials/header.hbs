@@ -7,7 +7,7 @@
 
 <header class="header-v3 ">
 
-			<div class="wrap-menu-desktop how-shadow1 ">
+			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
 
 					<!-- Logo desktop -->
@@ -17,14 +17,14 @@
 
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
-						<ul class="main-menu">
+						<ul class="main-menu-wide">
 							<li>
 								<a href="/">Home</a>
 							</li>
 
 							<li>
 								<a href="/products">Shop</a>
-                <ul class="sub-menu" hidden>
+                				<ul class="sub-menu-wide" >
 									<li><a href="/products/Edibles">Edibles</a></li>
 									<li><a href="/products/Vegan">Vegan</a></li>
 									<li><a href="/products/Tincture">Tincture</a></li>
@@ -46,7 +46,7 @@
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
-            <ul class="main-menu">
+            		<ul class="main-menu">
 							<li>
 								<form action="/product/search" method="POST" class="form-inline">
 									<input type="text" id="searchTxt" name="searchTxt" class=" form-control-sm mr-3 w-75 input1 bg-none plh1 stext-107 cl7" placeholder="Search for product">
@@ -56,15 +56,15 @@
 
 
 							<li>
-                  <button href="#" class="icon-header-item cl0 hov-cl1 trans-04 p-l-22 p-r-11" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  				<button href="#" class="icon-header-item cl0 hov-cl1 trans-04 p-l-22 p-r-11" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       							<i class="zmdi zmdi-account"></i>
       						</button>
-                  <ul class="sub-menu">
-                    {{# if login}}
+                  			<ul class="sub-menu">
+                    			{{# if login}}
   									<li><a href="/users/profile">Profile</a></li>
   									<li><a href="/users/logout">Logout</a></li>
-                    {{ else }}
-                    <li><a href="/users/signin">Sign In</a></li>
+                    			{{ else }}
+                    				<li><a href="/users/signin">Sign In</a></li>
   									<li><a href="/users/signup">Sign Up</a></li>
   									{{/if}}
   								</ul>
@@ -72,45 +72,34 @@
 							</li>
 
 							<li>
-                <div class="icon-header-item cl0 hov-cl1 trans-04 p-l-22 p-r-11 {{# if session.cart.totalQty}}icon-header-noti{{/if}} js-show-cart" data-notify={{session.cart.totalQty}}>
+                		<div class="icon-header-item cl0 hov-cl1 trans-04 p-l-22 p-r-11 {{# if session.cart.totalQty}}icon-header-noti{{/if}} js-show-cart" data-notify={{session.cart.totalQty}}>
     							<i class="zmdi zmdi-shopping-cart" onclick="location.replace('/shopping-cart');"></i>
-    						</div>
+    			</div>
 							</li>
 						</ul>
 					</div>
 				</nav>
-			</div>
 </div>
-
-</header>
-
-
-
-
-		<!-- Header Mobile -->
+<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->
 			<div class="logo-mobile">
-				<a href="index.html"><img src="https://designcontest-com-designcontest.netdna-ssl.com/data/contests/138418/entries/big_7f77ae583b4c66a4.jpg" alt="IMG-LOGO"></a>
+				<a href="/"><img src="https://enrich4life.com/wp-content/uploads/2019/03/Enrich-CBD-Logo-Transparent.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
 			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+				<div class="icon-header-item cl0 hov-cl1 trans-04 p-r-11 js-show-modal-search">
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
-					<i class="zmdi zmdi-shopping-cart"></i>
+				<div class="icon-header-item cl0 hov-cl1 trans-04 p-r-11 p-l-10 {{#if session.cart.totalQty}}icon-header-noti{{/if}} js-show-cart" data-notify={{session.cart.totalQty}}>
+					<i class="zmdi zmdi-shopping-cart" onclick="location.replace('/shopping-cart');"></i>
 				</div>
-
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-					<i class="zmdi zmdi-favorite-outline"></i>
-				</a>
 			</div>
 
 			<!-- Button show menu -->
-			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+			<div class="btn-show-menu-mobile navbar-light hamburger hamburger--squeeze">
 				<span class="hamburger-box">
 					<span class="hamburger-inner"></span>
 				</span>
@@ -124,48 +113,78 @@
 
 				<li>
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							Help & FAQs
+						{{#if login}}
+						<a href="/users/profile" class="flex-c-m p-lr-10 trans-04">
+							Profile
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							My Account
+						<a href="/users/logout" class="flex-c-m p-lr-10 trans-04">
+							Logout
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							EN
+						{{ else }}
+
+						<a href="/users/signin" class="flex-c-m p-lr-10 trans-04">
+							Sign In
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							USD
+						<a href="/users/signup" class="flex-c-m p-lr-10 trans-04">
+							Sign Up
 						</a>
+
+						{{/if}}
 					</div>
 				</li>
 			</ul>
 
 			<ul class="main-menu-m">
 				<li>
-					<a href="index.html">Home</a>
+					<a href="/">Home</a>
+				</li>
+
+				<li>
+					<a href="/products">Shop</a>
 					<ul class="sub-menu-m">
-						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
+						<li><a href="/products/Edibles">Edibles</a></li>
+						<li><a href="/products/Vegan">Vegan</a></li>
+						<li><a href="/products/Tincture">Tincture</a></li>
+						<li><a href="/products/Pet-care">Pet-care</a></li>
 					</ul>
 					<span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
 					</span>
 				</li>
 
+				
+
 				<li>
-					<a href="product.html">Shop</a>
+					<a href="/">About</a>
 				</li>
 
 				<li>
-					<a href="about.html">About</a>
-				</li>
-
-				<li>
-					<a href="contact.html">Contact</a>
+					<a href="/">Contact</a>
 				</li>
 			</ul>
 		</div>
+
+		
+<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+			<div class="container-search-header">
+				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+					<img src="/test/images/icons/icon-close2.png" alt="CLOSE">
+				</button>
+
+				<form action="/product/search" method="POST" class="wrap-search-header flex-w p-l-15">
+					<button class="flex-c-m trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+					<input class="plh3" type="text" id="searchTxt" name="searchTxt" placeholder="Search...">
+				</form>
+			</div>
+		</div>
+</header>
+
+
+
+
+		

@@ -4,6 +4,7 @@ var router = express.Router();
 var Product = require('../models/product');
 var Cart = require('../models/cart');
 var Order = require('../models/order');
+var Review = require('../models/review');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -24,9 +25,15 @@ router.get('/', function(req, res, next) {
 router.get('/products/product-details/:sku', function(req, res, next) {
   Product.findOne({'sku': req.params.sku}, function(err, product) {
     if (err) {
-      return res.redirect('/');
+      return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
     }
-    res.render('product-details', { title: 'Product Details', product: product});
+    Review.find({'sku': req.params.sku}, function(err, reviews) {
+      if (err) {
+        return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+      }
+      res.render('product-details', { title: 'Product Details', product: product, reviews: reviews});
+    });
+    
   });
 });
 
@@ -39,19 +46,66 @@ router.get('/products', function(req, res, next) {
     for (var i = 0; i < docs.length; i += chunkSize) {
       productChunks.push(docs.slice(i, i + chunkSize));
     }
-    res.render('products', { title: 'Products', products: productChunks , type: 'all-products'});
+
+    Review.aggregate(
+      [
+        {
+          $group:
+            {
+              _id: "$sku",
+              avgRating: { $avg: "$rating" },
+              count: {$sum: 1}
+            }
+        }
+      ]
+   ).exec(function(err, reviews) {
+      if (err) {
+        return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+      } else {
+        //console.log(reviews);
+        res.render('products', { title: 'Products', products: productChunks , type: 'all-products', avgReviews: reviews});
+      }
+    });
   });
 });
 
 /* GET products page by category. */
 router.get('/products/:category', function(req, res, next) {
   Product.find({"category": req.params.category}, null, {sort: { 'name': 'asc' }}, function(err, docs) {
+    if (err) {
+      return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+    }
+
     var productChunks = [];
     var chunkSize = 4;
     for (var i = 0; i < docs.length; i += chunkSize) {
       productChunks.push(docs.slice(i, i + chunkSize));
     }
-    res.render('products', { title: 'Products', products: productChunks, type: req.params.category });
+
+    Review.aggregate(
+      [
+        {
+          $match: {category: req.params.category}
+        },
+        {
+          $group:
+            {
+              _id: "$sku",
+              avgRating: { $avg: "$rating" },
+              count: {$sum: 1}
+            }
+        }
+      ]
+   ).exec(function(err, reviews) {
+      if (err) {
+        return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+      } else {
+        //console.log(reviews);
+        res.render('products', { title: 'Products', products: productChunks , type: 'all-products', avgReviews: reviews});
+      }
+    });
+
+    //res.render('products', { title: 'Products', products: productChunks, type: req.params.category });
   });
 });
 
@@ -59,12 +113,36 @@ router.get('/products/:category', function(req, res, next) {
 router.post('/product/search', function(req, res, next) {
   Product.find({"name": {'$regex' : req.body.searchTxt, '$options' : 'i'}}, null, {sort: { 'category': 'asc' }}, function(err, docs) {
 
+    if (err) {
+      return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+    }
+
     var productChunks = [];
     var chunkSize = 4;
     for (var i = 0; i < docs.length; i += chunkSize) {
       productChunks.push(docs.slice(i, i + chunkSize));
     }
-    res.render('products', { title: 'Products', products: productChunks, searchQuery: req.body.searchTxt, itemsLen: docs.length});
+
+    Review.aggregate(
+      [
+        {
+          $group:
+            {
+              _id: "$sku",
+              avgRating: { $avg: "$rating" },
+              count: {$sum: 1}
+            }
+        }
+      ]
+   ).exec(function(err, reviews) {
+      if (err) {
+        return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+      } else {
+        //console.log(reviews);
+        res.render('products', { title: 'Products', products: productChunks, searchQuery: req.body.searchTxt, itemsLen: docs.length, avgReviews: reviews});
+
+      }
+    });
   });
 });
 
@@ -75,7 +153,7 @@ router.get('/add-to-cart/:sku', function(req, res, next) {
   var cart = new Cart(req.session.cart ? req.session.cart : {});
   Product.findOne({'sku': productSKU}, function(err, product) {
     if (err) {
-      return res.redirect('/');
+        return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
     }
     cart.add(product, product.sku);
     req.session.cart = cart;
@@ -128,6 +206,12 @@ router.post('/checkout', isLoggedIn, function(req, res, next) {
   var date = new Date();
   var strDate = date.toUTCString();
   var cart = new Cart(req.session.cart);
+
+  for (var sku in cart.items) {
+    cart.items[sku].gotReview = false;
+    //console.log(cart.items[sku]);
+  }
+
   var order = new Order({
     user: req.user,
     cart: cart,
@@ -174,6 +258,10 @@ router.post('/cart/applycoupon', function(req, res, next) {
   var cart = new Cart(req.session.cart);
   req.session.cart = cart;
   return res.render('shopping-cart', { title: 'Shopping Cart', products: cart.generateArray(), totalPrice: totalPrice, coupon: req.session.cart.availableCoupon});
+});
+
+router.get('/success-buy', function(req, res, next) {
+  return res.render('success', { title: 'Successful Purchase', succMsg: "Order successfully approved."});
 });
 
 

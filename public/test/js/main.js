@@ -109,6 +109,8 @@
     });
 
 
+
+
     /*==================================================================
     [ Show / hide modal search ]*/
     $('.js-show-modal-search').on('click', function(){

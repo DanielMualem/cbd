@@ -10,7 +10,6 @@ var schema = new Schema({
   price: {type: Number, required: true},
   quantity: {type: Number, required: true},
   sold: {type: Number, required: false},
-  rating: {type: Number, required: false}
 });
 
 module.exports = mongoose.model('Product', schema);
