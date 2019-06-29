@@ -32,7 +32,7 @@ router.get('/profile', isLoggedIn, function(req, res, next) {
       console.log(cart);
       order.items = cart.generateArray();
     });
-    console.log(orders);
+    //console.log(orders);
     res.render('users/profile', {orders: orders, user: req.user});
   });
 });
@@ -42,7 +42,7 @@ router.get('/review-item', isLoggedIn, function(req, res, next) {
     if (err) {
       return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
     }
-    console.log(product);
+    //console.log(product);
     res.render('product-review', {product: product, orderId: req.query.orderId, user: req.user, csrfToken: req.csrfToken()});
   });
 });
@@ -154,7 +154,7 @@ router.post('/forgot', function(req, res, next) {
     function(token, done) {
       User.findOne({ 'email': req.body.email }, function(err, user) {
         if (!user) {
-          console.log("not user");
+          //console.log("not user");
           req.flash('error', 'No account with that email address exists.');
           return res.redirect('/users/forgot');
         }
@@ -215,7 +215,7 @@ router.post('/reset/:token', function(req, res) {
     function(done) {
       User.findOne({ 'resetPasswordToken': req.params.token, 'resetPasswordExpires': { $gt: Date.now() } }, function(err, user) {
         if (!user) {
-          console.log("errorrrr");
+          //console.log("errorrrr");
           req.flash('error', 'Password reset token is invalid or has expired.');
           return res.redirect('back');
         }

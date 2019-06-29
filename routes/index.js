@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
   var succMsg = req.flash('success')[0];
 
   Product.find({}).sort({'sold': -1}).limit(3).exec(function(err, items) {
-    console.log(items);
+    //console.log(items);
 
     res.render('index', { title: 'Index', succMsg: succMsg, noMessages: !succMsg, best: items});
   });
@@ -40,7 +40,7 @@ router.get('/products/product-details/:sku', function(req, res, next) {
 
 /* GET products page. */
 router.get('/products', function(req, res, next) {
-  console.log(req.session);
+  //console.log(req.session);
   Product.find(null, null, {sort: { 'category': 'asc' }},function(err, docs) {
     var productChunks = [];
     var chunkSize = 4;
@@ -151,7 +151,6 @@ router.post('/product/search', function(req, res, next) {
 
 router.get('/add-to-cart/:sku', function(req, res, next) {
   var productSKU = req.params.sku;
-  console.log(productSKU);
   var cart = new Cart(req.session.cart ? req.session.cart : {});
   Product.findOne({'sku': productSKU}, function(err, product) {
     if (err) {
@@ -160,7 +159,6 @@ router.get('/add-to-cart/:sku', function(req, res, next) {
     if (!product) {
       return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
   }
-    //console.log(product);
     cart.add(product, product.sku);
     req.session.cart = cart;
     return res.redirect('/products');
@@ -246,7 +244,7 @@ router.post('/checkout', isLoggedIn, function(req, res, next) {
       });
     }
     req.flash('success', 'Successfully bought!');
-    console.log(req.flash('success')[0]);
+    //console.log(req.flash('success')[0]);
     req.session.cart = null;
     res.redirect('/');
   });
@@ -255,7 +253,7 @@ router.post('/checkout', isLoggedIn, function(req, res, next) {
 
 router.post('/cart/applycoupon', function(req, res, next) {
   var totalPrice = req.session.cart.totalPrice;
-  console.log(req.session.cart.availableCoupon);
+  //console.log(req.session.cart.availableCoupon);
   if (req.body.coupon == 'nicecode' && req.session.cart.availableCoupon == 2) {
     totalPrice = 0.7 * totalPrice;
     req.session.cart.availableCoupon = 1;
