@@ -150,11 +150,13 @@ router.post('/product/search', function(req, res, next) {
 
 router.get('/add-to-cart/:sku', function(req, res, next) {
   var productSKU = req.params.sku;
+  console.log(productSKU);
   var cart = new Cart(req.session.cart ? req.session.cart : {});
   Product.findOne({'sku': productSKU}, function(err, product) {
     if (err) {
         return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
     }
+    console.log(product);
     cart.add(product, product.sku);
     req.session.cart = cart;
     return res.redirect('/products');
