@@ -40,6 +40,7 @@ router.get('/products/product-details/:sku', function(req, res, next) {
 
 /* GET products page. */
 router.get('/products', function(req, res, next) {
+  console.log(req.session);
   Product.find(null, null, {sort: { 'category': 'asc' }},function(err, docs) {
     var productChunks = [];
     var chunkSize = 4;
@@ -156,7 +157,10 @@ router.get('/add-to-cart/:sku', function(req, res, next) {
     if (err) {
         return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
     }
-    console.log(product);
+    if (!product) {
+      return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+  }
+    //console.log(product);
     cart.add(product, product.sku);
     req.session.cart = cart;
     return res.redirect('/products');

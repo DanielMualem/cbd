@@ -78,6 +78,9 @@ var register = function(Handlebars) {
 
       }
       return 0;
+    },
+    bla: function(cart) {
+      console.log(cart);
     }
 };
 
