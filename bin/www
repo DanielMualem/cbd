@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-
+const fs = require('fs');
 var app = require('../app');
 var debug = require('debug')('cbd:server');
 var http = require('http');
