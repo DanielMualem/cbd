@@ -40,7 +40,7 @@
   <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
   <div class="block2 ">
     <div class="block2-pic hov-img0">
-      <img src={{this.imgPath}} alt="IMG-PRODUCT">
+      <a href="/products/product-details/{{this.sku}}"><img src={{this.images.[0]}} alt="IMG-PRODUCT"></a>
       <button onclick="addItem('/add-to-cart/{{this.sku}}')" class="block2-btn flex-c-m stext-103 cl0 size-102 bg3 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
         Add To Cart
       </button>
@@ -74,7 +74,9 @@
 async function addItem(x) {
   fetch(x)
   .then(function(response) {
-    location.reload();
+    $('#carty').load(document.URL +  ' #carty');
+    $('#carty-mobile').load(document.URL +  ' #carty-mobile');
+    //location.reload();
   })
   .then(function(myJson) {
     console.log(JSON.stringify(myJson));

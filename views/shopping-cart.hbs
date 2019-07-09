@@ -28,7 +28,7 @@
               <tr class="table_row">
                 <td class="column-1">
                   <div onclick="changeCart('/remove/{{this.item.sku}}')" class="how-itemcart1">
-                    <img src={{this.item.imgPath}} alt="IMG">
+                    <img src={{this.item.images.[0]}} alt="IMG">
                   </div>
                 </td>
                 <td class="column-2">{{this.item.name}}</td>
@@ -105,24 +105,6 @@
 	            </div>
 
               <div class="p-t-15">
-
-                <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                  <select class="js-select2" name="time">
-                    <option>Select a country...</option>
-                    <option>USA</option>
-                    <option>UK</option>
-                  </select>
-                  <div class="dropDownSelect2"></div>
-                </div>
-
-                <div class="bor8 bg0 m-b-12">
-                  <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country">
-                </div>
-
-                <div class="bor8 bg0 m-b-22">
-                  <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip">
-                </div>
-
 
               </div>
             </div>
@@ -201,7 +183,7 @@
               onApprove: function(data, actions) {
                 // Capture the funds from the transaction
                 return actions.order.capture().then(function(details) {
-                  console.log(details);
+                  //console.log(details);
                   (async () => {
                       const rawResponse = await fetch('/checkout', {
                         method: 'POST',
@@ -211,17 +193,19 @@
                         },
 
                         body: JSON.stringify(details)
+                      }).then(function(result) {
+                        console.log(result);
                       });
                     })();
                   // Show a success message to your buyer
                   alert('Transaction completed by ' + details.payer.name.given_name);
-                  location.replace('http://localhost:3000/');
+                  location.replace('/');
 									//location.reload();
                 });
               },
               onError: function(data, actions) {
                 alert('Something went wrong');
-                actions.redirect("/checkout");
+                location.reload();
               }
             }).render('#paypal-button-container');
 

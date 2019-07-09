@@ -31,6 +31,7 @@ router.get('/products/product-details/:sku', function(req, res, next) {
       if (err) {
         return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
       }
+      //console.log(product);
       res.render('product-details', { title: 'Product Details', product: product, reviews: reviews});
     });
     
@@ -244,9 +245,10 @@ router.post('/checkout', isLoggedIn, function(req, res, next) {
       });
     }
     req.flash('success', 'Successfully bought!');
-    //console.log(req.flash('success')[0]);
+    console.log(req.flash('success')[0]);
     req.session.cart = null;
-    res.redirect('/');
+    //res.redirect('/');
+    res.write("hiiiiii");
   });
 });
 

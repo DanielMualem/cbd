@@ -45,7 +45,7 @@
 
 
 					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m">
+					<div id="carty" class="wrap-icon-header flex-w flex-r-m">
             		<ul class="main-menu">
 							<li>
 								<form action="/product/search" method="POST" class="form-inline">
@@ -72,7 +72,7 @@
 							</li>
 
 							<li>
-                		<div class="icon-header-item cl0 hov-cl1 trans-04 p-l-22 p-r-11 {{# if session.cart.totalQty}}icon-header-noti{{/if}} js-show-cart" data-notify={{session.cart.totalQty}}>
+                		<div  class="icon-header-item cl0 hov-cl1 trans-04 p-l-22 p-r-11 {{# if session.cart.totalQty}}icon-header-noti{{/if}} js-show-cart" data-notify={{session.cart.totalQty}}>
     							<i class="zmdi zmdi-shopping-cart" onclick="location.replace('/shopping-cart');"></i>
     			</div>
 							</li>
@@ -81,7 +81,8 @@
 				</nav>
 </div>
 <!-- Header Mobile -->
-		<div class="wrap-header-mobile">
+<div id="carty-mobile">
+		<div  class="wrap-header-mobile">
 			<!-- Logo moblie -->
 			<div class="logo-mobile">
 				<a href="/"><img src="https://enrich4life.com/wp-content/uploads/2019/03/Enrich-CBD-Logo-Transparent.png" alt="IMG-LOGO"></a>
@@ -181,6 +182,7 @@
 					<input class="plh3" type="text" id="searchTxt" name="searchTxt" placeholder="Search...">
 				</form>
 			</div>
+		</div>
 		</div>
 </header>
 

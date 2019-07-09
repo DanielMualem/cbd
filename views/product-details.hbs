@@ -1,5 +1,15 @@
 <!-- Product Detail -->
+	<link rel="icon" type="image/png" href="/test/images/icons/favicon.png"/>
+<!--===============================================================================================-->
 
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/test/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/test/vendor/slick/slick.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/test/vendor/MagnificPopup/magnific-popup.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/test/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <section class="sec-product-detail bg0 p-t-65 p-b-60 m-t-75">
   <div class="container">
     <div class="row">
@@ -10,15 +20,18 @@
             <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
             <div class="slick3 gallery-lb">
-              <div class="item-slick3" data-thumb="{{product.imgPath}}">
+              {{#each product.images}}
+                <div class="item-slick3" data-thumb="{{this}}">
                 <div class="wrap-pic-w pos-relative">
-                  <img src="{{product.imgPath}}" alt="IMG-PRODUCT">
+                  <img src="{{this}}" alt="IMG-PRODUCT">
 
-                  <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{product.imgPath}}">
+                  <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{this}}">
                     <i class="fa fa-expand"></i>
                   </a>
                 </div>
               </div>
+              {{/each}}
+              
 
             </div>
           </div>
@@ -34,10 +47,12 @@
           <span class="mtext-106 cl2">
             $ {{product.price}}
           </span>
-
-          <p class="stext-102 cl3 p-t-23">
-            {{product.description}}
-          </p>
+          {{#each product.description}}
+            <p class="stext-102 cl3 p-t-23">
+              {{this}}
+            </p>
+          {{/each}}
+          
 
           <!--  -->
           <div class="p-t-33">
@@ -205,10 +220,54 @@
 async function addItem(x) {
   fetch(x)
   .then(function(response) {
-    location.reload();
+    $('#carty').load(document.URL +  ' #carty');
+    $('#carty-mobile').load(document.URL +  ' #carty-mobile');
+    //location.reload();
   })
   .then(function(myJson) {
     console.log(JSON.stringify(myJson));
   });
 }
 </script>
+
+<!--===============================================================================================-->
+	<script src="/test/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/test/vendor/bootstrap/js/popper.js"></script>
+	<script src="/test/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/test/vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="/test/vendor/daterangepicker/moment.min.js"></script>
+	<script src="/test/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="/test/vendor/slick/slick.min.js"></script>
+	<script src="/test/js/slick-custom.js"></script>
+<!--===============================================================================================-->
+	<script src="/test/vendor/parallax100/parallax100.js"></script>
+	<script>
+        $('.parallax100').parallax100();
+	</script>
+<!--===============================================================================================-->
+	<script src="/test/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script>
+		$('.gallery-lb').each(function() { // the containers for all your galleries
+			$(this).magnificPopup({
+		        delegate: 'a', // the selector for gallery item
+		        type: 'image',
+		        gallery: {
+		        	enabled:true
+		        },
+		        mainClass: 'mfp-fade'
+		    });
+		});
+	</script>
+
