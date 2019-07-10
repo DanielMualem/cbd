@@ -42,7 +42,7 @@ router.get('/products/product-details/:sku', function(req, res, next) {
 /* GET products page. */
 router.get('/products', function(req, res, next) {
   //console.log(req.session);
-  Product.find(null, null, {sort: { 'category': 'asc' }},function(err, docs) {
+  Product.find(null, null, {sort: { 'sku': 'asc' }},function(err, docs) {
     var productChunks = [];
     var chunkSize = 4;
     for (var i = 0; i < docs.length; i += chunkSize) {
@@ -73,7 +73,7 @@ router.get('/products', function(req, res, next) {
 
 /* GET products page by category. */
 router.get('/products/:category', function(req, res, next) {
-  Product.find({"category": req.params.category}, null, {sort: { 'name': 'asc' }}, function(err, docs) {
+  Product.find({"category": req.params.category}, null, {sort: { 'sku': 'asc' }}, function(err, docs) {
     if (err) {
       return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
     }
@@ -113,7 +113,7 @@ router.get('/products/:category', function(req, res, next) {
 
 /* GET products page by category. */
 router.post('/product/search', function(req, res, next) {
-  Product.find({"name": {'$regex' : req.body.searchTxt, '$options' : 'i'}}, null, {sort: { 'category': 'asc' }}, function(err, docs) {
+  Product.find({"name": {'$regex' : req.body.searchTxt, '$options' : 'i'}}, null, {sort: { 'sku': 'asc' }}, function(err, docs) {
 
     if (err) {
       return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});

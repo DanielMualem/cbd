@@ -32,7 +32,7 @@
       </div>
 
 {{#if searchQuery}} <h3 class="stext-my cl13 m-r-32 m-tb-5">Showing search results for: {{this.searchQuery}} ({{itemsLen}} results)</h3> {{/if}}
-
+<div class="container ">
 {{# each products }}
 <div class="row isotope-grid ">
   <!-- Block2 -->
@@ -48,15 +48,16 @@
 
     <div class="block2-txt flex-w flex-t p-t-14 text-center">
       <div class="block2-txt-child1 flex-col-l offset-md-1" style="text-align: center;">
-        <a href="/products/product-details/{{this.sku}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+        <a href="/products/product-details/{{this.sku}}" class="stext-104 cl5 hov-cl1 trans-04 js-name-b2 p-b-6">
           {{this.name}}
         </a>
 
         <span class="stext-104 cl3 offset-5 " style="text-align: center;">
           ${{this.price}}
         </span>
-        <span class="stext-102 cl3 offset-3 " style="text-align: center;">
-          <i class="zmdi zmdi-star"></i>&nbsp; {{revToProd ../../this.avgReviews this.sku}}/5 ({{numOfReviews ../../this.avgReviews this.sku}} Reviews)
+</br>
+        <span class="stext-102s cl3 offset-3 " style="text-align: center;">
+          <i class="zmdi zmdi-star cl14"></i>&nbsp; {{revToProd ../../this.avgReviews this.sku}}/5 ({{numOfReviews ../../this.avgReviews this.sku}} Reviews)
         </span>
       </div>
 
@@ -66,6 +67,8 @@
 {{/each}}
 </div>
 {{/each}}
+</div>
+
 </div>
 </div>
 </div>

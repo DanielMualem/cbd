@@ -741,7 +741,7 @@ var products = [
     'CBD gummies are made with ingredients derived from GMO-free organic CBD oil and are perfect for on-the-go, convenient dosing. Make your life a little more sweet by adding Sun State Gummies to your diet!'],
     price: 49.99,
     quantity: 100,
-    sold: 0,
+    sold: 1,
     ingredients: 'Sugar, Invert Sugar, Cannabidiol, Alcohol, Gelatin, Corn Syrup, Modified Corn Starch, Wheat, Citric Acid, White Mineral Oil, Natural & Artificial Flavor, Carnauba Wax, Yellow #5, Yellow #6, Blue #1, Melatonin.',
     images: ['/images/products/edibles/rev3.jpg', '/images/products/edibles/retaken-products-40.jpg', '/images/products/edibles/lg_open_-42-(2).jpg', '/images/products/edibles/proportions-of-edibles-rev3-58-79-94.png']
   }),
@@ -1004,7 +1004,7 @@ var products = [
     'CBD dog treats are designed for both large and small pets, and may be able to help aid in providing a sense of calm, relief of pain, and support for your animal’s overall health and wellness. CBD has also been reported as something that may be helpful for pets with aggressive disorders, previous traumas, cognitive issues, excessive vocalization and more. All of our pet treats contain non-toxic CBD oil for dogs!'],
     price: 26.99,
     quantity: 100,
-    sold: 0,
+    sold: 1,
     ingredients: 'Pharmaceutical grade cannabidiol (cbd), Wheat flour, corn gluten meal, poultry by product meal, chicken fat (preserved with mixed tocopherols), wheat bran, choline chloride, beef and bone meal, natural flavor, salt, wheat germ meal, brewers dried yeast, calcium carbonate, dicalcium phosphate, vitamins (vitamin a supplement, vitamin d3 supplement, vitamin e supplement, niacin, d-calcium pantothenate, pyridoxine hydrochloride (source of a vitamin b6), riboflavin supplement, folic acid, biotin, vitamin b12 supplement, minerals (zinc sulfate, copper sulfate, manganese sulfate, calcium iodate, sodium selenite), potassium sorbate (a preservative), alfalfa (source of vegetable flavour), artificial colors (yellow #5, blue #1), sodium metabisulfite (a preservative).',
     images: ['/images/products/pet-care/bone_biscuits_100_tc-open-zoom.jpg', '/images/products/pet-care/biscuits_100_tc-closed-zoom.jpg', '/images/products/pet-care/bones_zoom.jpg']
   }),
@@ -1076,7 +1076,7 @@ var products = [
   new Product({
     category: 'Pet-care',
     name: 'FULL SPECTRUM TINCTURE FOR PET CATS 150MG - SALMON',
-    sku: 'SUN300012',
+    sku: 'SUN30012',
     brand: 'Sun State Hemp',
     description: ['Full Spectrum Hemp Oil for pets is a great way to add 100% natural CBD, as well as a host of other potentially beneficial cannabinoids, to your pet’s diet. It can be added to your best friend’s water, or simply placed directly into their mouths for nearly instant relief. All of our pet care products are made with non-toxic ingredients to ensure your pet is getting the treatment they deserve.',
     'Full spectrum, also known as full plant or broad spectrum CBD, unlike CBD isolate, contains all other cannabinoids found the hemp plant. This includes CBN, CBL, and trace amounts of THC to name a few. With the variety of CBD concentrations and other compounds that hemp has to offer, Full Spectrum products can cover more ground, providing users with a variety of potentially beneficial cannabinoids in addition to CBD.'],
@@ -1883,7 +1883,7 @@ var products = [
       'CBD vape oil is one of the best ways to incorporate CBD oil into your life. All of our pre-filled cartridges are filled with our proprietary isolate infused CBD oils, and are made using natural CBD hemp oil.'],
       price: 21.99,
       quantity: 100,
-      sold: 0,
+      sold: 1,
       ingredients: '100% Natural Cannabidiol (CBD) Isolate, Food Grade Vegetable Glycerin, Propylene Glycol, and Flavorings',
       images: ['/images/products/vapes/blue-dream-cartridge-zoom.jpg', '/images/products/vapes/prefilled-round-tip1-zoom.jpg', '/images/products/vapes/prefilled-round-tip-zoom.jpg', '/images/products/vapes/round-tip-cartridge-slv-1-zoom.jpg', '/images/products/vapes/round-tip-cartridge-slv-2-zoom.jpg',]
     }),

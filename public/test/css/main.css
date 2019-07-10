@@ -2284,6 +2284,7 @@ input.num-product::-webkit-inner-spin-button {
 .cl11 {color: #f9ba48;}
 .cl12 {color: #ccc;}
 .cl13 {color: #000000;}
+.cl14 {color: gold;}
 
 /*//////////////////////////////////////////////////////////////////
 [ S-Text 0 - 15 ]*/
@@ -2314,6 +2315,12 @@ input.num-product::-webkit-inner-spin-button {
 .stext-102 {
   font-family: Poppins-Regular;
   font-size: 14px;
+  line-height: 1.7;
+}
+
+.stext-102s {
+  font-family: Poppins-Regular;
+  font-size: 13px;
   line-height: 1.7;
 }
 

@@ -44,6 +44,11 @@
             {{product.name}}
           </h4>
 
+
+		<span class="mtext-106 cl2">
+            Brand: {{product.brand}}
+        </span>
+</br></br>
           <span class="mtext-106 cl2">
             $ {{product.price}}
           </span>
@@ -93,7 +98,7 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item p-b-10">
-            <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
+            <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Ingredients</a>
           </li>
 
           <li class="nav-item p-b-10">
@@ -111,7 +116,7 @@
           <div class="tab-pane fade show active" id="description" role="tabpanel">
             <div class="how-pos2 p-lr-15-md">
               <p class="stext-102 cl6">
-                {{product.description}}
+                {{product.ingredients}}
               </p>
             </div>
           </div>
