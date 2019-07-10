@@ -22,7 +22,7 @@ router.use(csrfProtection);
 router.get('/profile', isLoggedIn, function(req, res, next) {
   Order.find({user: req.user},  function(err, orders) {
     if (err) {
-      return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+      return res.render('error', {title: "Leafole - Error", errMsg: 'Something went wrong. Please repeat your steps.'});
     }
     //console.log(orders);
     orders = orders.reverse();
@@ -33,7 +33,7 @@ router.get('/profile', isLoggedIn, function(req, res, next) {
       order.items = cart.generateArray();
     });
     //console.log(orders);
-    res.render('users/profile', {orders: orders, user: req.user});
+    res.render('users/profile', {title: "Leafole - Profile", orders: orders, user: req.user});
   });
 });
 
@@ -43,14 +43,14 @@ router.get('/review-item', isLoggedIn, function(req, res, next) {
       return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
     }
     //console.log(product);
-    res.render('product-review', {product: product, orderId: req.query.orderId, user: req.user, csrfToken: req.csrfToken()});
+    res.render('product-review', {title: "Leafole - Review", product: product, orderId: req.query.orderId, user: req.user, csrfToken: req.csrfToken()});
   });
 });
 
 router.post('/review-item', isLoggedIn, function(req, res, next) {
   Product.findOne({'sku': req.body.sku}, function(err, product) {
     if (err) {
-      return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+      return res.render('error', {title: "Leafole - Error", errMsg: 'Something went wrong. Please repeat your steps.'});
     }
     var review = new Review({
       user: req.user,
@@ -62,7 +62,7 @@ router.post('/review-item', isLoggedIn, function(req, res, next) {
 
     review.save(function(err, result) {
       if (err) {
-        return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+        return res.render('error', {title: "Leafole - Error", errMsg: 'Something went wrong. Please repeat your steps.'});
       }
       Order.findOne({'_id': req.body.orderId}, function(err, order) {
         var carty = new Cart(order.cart);
@@ -71,9 +71,9 @@ router.post('/review-item', isLoggedIn, function(req, res, next) {
     
         order.save(function(err, result) {
           if (err) {
-            return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
+            return res.render('error', {title: "Leafole - Error",errMsg: 'Something went wrong. Please repeat your steps.'});
           }
-          return res.render('success', {errMsg: 'Thank you for your review!'});
+          return res.render('success', {title: "Leafole - Review", errMsg: 'Thank you for your review!'});
         });
       });
     });
@@ -95,7 +95,7 @@ router.use('/', isNotLoggedIn, function(req, res, next) {
 // Sign In
 router.get('/signin', function(req, res, next) {
   var messages = req.flash('error');
-  res.render('users/signin', { csrfToken: req.csrfToken(),
+  res.render('users/signin', {title: "Leafole - Sign In", csrfToken: req.csrfToken(),
     messages: messages, hasErrors: messages.length > 0});
 });
 
@@ -115,7 +115,7 @@ router.post('/signin', passport.authenticate('local.signin', {
 // Sign Up
 router.get('/signup', function(req, res, next) {
   var messages = req.flash('error');
-  res.render('users/signup', { csrfToken: req.csrfToken(),
+  res.render('users/signup', {title: "Leafole - Sign Up", csrfToken: req.csrfToken(),
     messages: messages, hasErrors: messages.length > 0});
 });
 
@@ -136,7 +136,7 @@ router.post('/signup', passport.authenticate('local.signup', {
 router.get('/forgot', function(req, res) {
   var infoMsg = req.flash('info');
   var errMsg = req.flash('error');
-  res.render('users/forgot-password', { csrfToken: req.csrfToken(),
+  res.render('users/forgot-password', { title: "Leafole - Forgot password",csrfToken: req.csrfToken(),
     user: req.user, errMsg: errMsg, hasErrors: errMsg.length > 0, infoMsg: infoMsg, hasInfo: infoMsg.length > 0
   });
 });
@@ -203,7 +203,7 @@ router.get('/reset/:token', function(req, res) {
       req.flash('error', 'Password reset token is invalid or has expired.');
       return res.redirect('/users/forgot');
     }
-    res.render('users/reset-password', { csrfToken: req.csrfToken(),
+    res.render('users/reset-password', {title: "Leafole - Reset password", csrfToken: req.csrfToken(),
       user: req.user, token: req.params.token, errMsg: errMsg, hasErrors: errMsg.length > 0
     });
   });

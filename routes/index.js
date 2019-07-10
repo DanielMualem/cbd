@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
   Product.find({}).sort({'sold': -1}).limit(3).exec(function(err, items) {
     //console.log(items);
 
-    res.render('index', { title: 'Index', succMsg: succMsg, noMessages: !succMsg, best: items});
+    res.render('index', { title: 'Leafole - wellness market', succMsg: succMsg, noMessages: !succMsg, best: items});
   });
 
 
@@ -32,7 +32,7 @@ router.get('/products/product-details/:sku', function(req, res, next) {
         return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
       }
       //console.log(product);
-      res.render('product-details', { title: 'Product Details', product: product, reviews: reviews});
+      res.render('product-details', { title: 'Leafole - ' + product.name, product: product, reviews: reviews});
     });
     
   });
@@ -65,7 +65,7 @@ router.get('/products', function(req, res, next) {
         return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
       } else {
         //console.log(reviews);
-        res.render('products', { title: 'Products', products: productChunks , type: 'all-products', avgReviews: reviews});
+        res.render('products', { title: 'Leafole - Shop', products: productChunks , type: 'all-products', avgReviews: reviews});
       }
     });
   });
@@ -103,7 +103,7 @@ router.get('/products/:category', function(req, res, next) {
         return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
       } else {
         //console.log(reviews);
-        res.render('products', { title: 'Products', products: productChunks , type: 'all-products', avgReviews: reviews});
+        res.render('products', { title: 'Leafole - ' + req.params.category, products: productChunks , type: 'all-products', avgReviews: reviews});
       }
     });
 
@@ -141,7 +141,7 @@ router.post('/product/search', function(req, res, next) {
         return res.render('error', {errMsg: 'Something went wrong. Please repeat your steps.'});
       } else {
         //console.log(reviews);
-        res.render('products', { title: 'Products', products: productChunks, searchQuery: req.body.searchTxt, itemsLen: docs.length, avgReviews: reviews});
+        res.render('products', { title: 'Leafole - search results', products: productChunks, searchQuery: req.body.searchTxt, itemsLen: docs.length, avgReviews: reviews});
 
       }
     });
@@ -190,7 +190,7 @@ router.get('/shopping-cart', function(req, res, next) {
     return res.render('shopping-cart', { products: null});
   }
   var cart = new Cart(req.session.cart);
-  return res.render('shopping-cart', { title: 'Shopping Cart', products: cart.generateArray(), totalPrice: cart.totalPrice, coupon: req.session.cart.availableCoupon});
+  return res.render('shopping-cart', { title: 'Leafole - Shopping Cart', products: cart.generateArray(), totalPrice: cart.totalPrice, coupon: req.session.cart.availableCoupon});
 });
 
 
@@ -201,7 +201,7 @@ router.get('/checkout', isLoggedIn, function(req, res, next) {
   }
   var cart = new Cart(req.session.cart);
   var errMsg = req.flash('error')[0];
-  res.render('checkout', { title: 'Shopping Cart', total: cart.totalPrice, errMsg: errMsg, noError: !errMsg});
+  res.render('checkout', { title: 'Leafole - Shopping Cart', total: cart.totalPrice, errMsg: errMsg, noError: !errMsg});
 });
 
 router.post('/checkout', isLoggedIn, function(req, res, next) {
@@ -263,11 +263,11 @@ router.post('/cart/applycoupon', function(req, res, next) {
   req.session.cart.totalPrice = totalPrice;
   var cart = new Cart(req.session.cart);
   req.session.cart = cart;
-  return res.render('shopping-cart', { title: 'Shopping Cart', products: cart.generateArray(), totalPrice: totalPrice, coupon: req.session.cart.availableCoupon});
+  return res.render('shopping-cart', { title: 'Leafole - Shopping Cart', products: cart.generateArray(), totalPrice: totalPrice, coupon: req.session.cart.availableCoupon});
 });
 
 router.get('/success-buy', function(req, res, next) {
-  return res.render('success', { title: 'Successful Purchase', succMsg: "Order successfully approved."});
+  return res.render('success', { title: 'Leafole - Successful Purchase', succMsg: "Order successfully approved."});
 });
 
 
